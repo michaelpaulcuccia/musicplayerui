@@ -1,0 +1,15 @@
+.track {
+  margin: 18px 0;
+}
+
+.btn {
+  cursor: pointer;
+}
+
+.bordered {
+  border: 1px solid black;
+}
+
+.notBordered {
+  border: 1px solid blue;
+}
