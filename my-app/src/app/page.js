@@ -27,20 +27,42 @@ const tracks = [
 
 export default function Home() {
   const [selectedTrack, setSelectedTrack] = useState({ ...tracks[0] });
-  console.log(selectedTrack);
+  const [showPlay, setShowPlay] = useState(true);
 
   const handleClick = (action) => {
-    console.log(action);
+    const lastItem = tracks.length;
+
+    //FORWARD
+    if (action === "forward") {
+      if (selectedTrack.id === lastItem) {
+        setSelectedTrack({ ...tracks[0] });
+      } else {
+        setSelectedTrack({ ...tracks[selectedTrack.id] });
+      }
+      //REWIND
+    } else if (action === "rewind") {
+      if (selectedTrack.id === 1) {
+        setSelectedTrack({ ...tracks[3] });
+      } else {
+        let id = selectedTrack.id - 2;
+        setSelectedTrack({ ...tracks[id] });
+      }
+    }
+    //STOP & PLAY
+    else if (action === "play") {
+      setShowPlay(false);
+    } else {
+      setShowPlay(true);
+    }
   };
 
   return (
-    <div className={styles.track}>
+    <div className={styles.root}>
       {tracks.map((item, i) => (
         <div
           key={i}
-          className={
-            i + 1 === selectedTrack.id ? styles.bordered : styles.notBordered
-          }
+          className={i === selectedTrack.id - 1 ? styles.bordered : ""}
+          style={{ margin: "12px 0" }}
         >
           {item.title} by {item.artist}
         </div>
@@ -49,9 +71,16 @@ export default function Home() {
         <span onClick={() => handleClick("rewind")} className={styles.btn}>
           REWIND
         </span>
-        <span onClick={() => handleClick("play")} className={styles.btn}>
-          PLAY
-        </span>
+        {showPlay ? (
+          <span onClick={() => handleClick("play")} className={styles.btn}>
+            PLAY
+          </span>
+        ) : (
+          <span onClick={() => handleClick("stop")} className={styles.btn}>
+            STOP
+          </span>
+        )}
+
         <span onClick={() => handleClick("forward")} className={styles.btn}>
           FORWARD
         </span>
