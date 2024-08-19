@@ -1,27 +1,32 @@
 "use client";
 import React, { useState } from "react";
+
 import styles from "./page.module.css";
 
 const tracks = [
   {
     id: 1,
     title: "All My Exes Live In Texas",
-    artist: "George Strat",
+    artist: "George Strait",
+    image: "/images/gs.webp",
   },
   {
     id: 2,
     title: "Georgia On My Mind",
     artist: "Willie Nelson",
+    image: "/images/wn.jpeg",
   },
   {
     id: 3,
     title: "Waymore's Blues",
     artist: "Waylon Jennings",
+    image: "/images/wj.webp",
   },
   {
     id: 4,
     title: "The Valley",
     artist: "Charley Crockett",
+    image: "/images/cc.jpg",
   },
 ];
 
@@ -80,7 +85,6 @@ export default function Home() {
             STOP
           </span>
         )}
-
         <span onClick={() => handleClick("forward")} className={styles.btn}>
           FORWARD
         </span>
